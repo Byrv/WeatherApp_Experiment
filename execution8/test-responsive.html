@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Responsive harness</title></head>
+<body>
+<pre id="results">running…</pre>
+<script>
+(async () => {
+  const widths = [1920, 1440, 1280, 800];
+  const out = [];
+  for (const w of widths) {
+    const f = document.createElement("iframe");
+    f.width = w; f.height = 900; f.style.border = "0";
+    document.body.appendChild(f);
+    await new Promise(r => { f.onload = () => r(); f.src = "/index.html"; setTimeout(r, 5000); });
+    await new Promise(r => setTimeout(r, 300));
+    const d = f.contentDocument;
+    const singleOverflow = d.documentElement.scrollWidth > w;
+    d.getElementById("tab-compare").click();
+    await new Promise(r => setTimeout(r, 100));
+    const cols = f.contentWindow.getComputedStyle(d.querySelector(".compare-grid")).gridTemplateColumns.split(" ").length;
+    const compareOverflow = d.documentElement.scrollWidth > w;
+    out.push({ width: w, singleOverflow, compareOverflow, compareCols: cols });
+    f.remove();
+  }
+  document.getElementById("results").textContent = "DONE " + JSON.stringify(out);
+})();
+</script>
+</body>
+</html>

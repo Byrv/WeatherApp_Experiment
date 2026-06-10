@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1>Weather</h1>
+    <nav class="view-toggle" role="tablist" aria-label="View">
+      <button id="tab-single" role="tab" aria-selected="true" class="active">Single</button>
+      <button id="tab-compare" role="tab" aria-selected="false">Compare</button>
+    </nav>
+  </header>
+
+  <main>
+    <div id="error-banner" class="error-banner hidden" role="alert">
+      <span id="error-text"></span>
+      <button id="error-dismiss" aria-label="Dismiss error">&times;</button>
+    </div>
+
+    <!-- Single-city view -->
+    <section id="view-single" class="view">
+      <form id="search-form" class="search-form">
+        <input id="city-input" type="text" aria-label="City name"
+               placeholder="Search for a city…" autocomplete="off">
+        <button id="search-btn" type="submit">Search</button>
+      </form>
+      <div id="single-card" class="card-slot"></div>
+    </section>
+
+    <!-- Compare view -->
+    <section id="view-compare" class="view hidden">
+      <form id="compare-form" class="search-form compare-form">
+        <input id="city-a-input" type="text" aria-label="City A"
+               placeholder="City A" autocomplete="off">
+        <input id="city-b-input" type="text" aria-label="City B"
+               placeholder="City B" autocomplete="off">
+        <button id="compare-btn" type="submit">Compare</button>
+      </form>
+      <div class="compare-grid">
+        <div id="compare-card-a" class="card-slot"></div>
+        <div id="compare-card-b" class="card-slot"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/icons.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
